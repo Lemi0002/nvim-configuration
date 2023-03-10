@@ -8,18 +8,17 @@ end
 
 local lsp = lsp_zero.preset({
     name = 'minimal',
-    set_lsp_keymaps = {omit = {'<F2>'}},
+    set_lsp_keymaps = { omit = { '<F2>' } },
     manage_nvim_cmp = true,
     suggest_lsp_servers = true,
 })
 
 -- General keymaps
 lsp.on_attach(function(client, bufnr)
-    local options = {buffer = bufnr}
+    local options = { buffer = bufnr }
 
     vim.keymap.set('n', '<leader>rl', vim.lsp.buf.rename, options)
     vim.keymap.set('n', 'gQ', vim.lsp.buf.format, options)
 end)
 
 lsp.setup()
-

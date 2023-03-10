@@ -28,4 +28,3 @@ local status_ok = pcall(vim.cmd.colorscheme, 'tokyonight-moon')
 if not status_ok then
     vim.cmd.colorscheme('desert')
 end
-

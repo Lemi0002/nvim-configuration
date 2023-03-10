@@ -5,4 +5,3 @@ if not status_ok then
     print('monokai not found')
     return
 end
-

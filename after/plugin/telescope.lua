@@ -10,6 +10,5 @@ end
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fp', builtin.git_files, {})
 vim.keymap.set('n', '<leader>sp', function()
-    builtin.grep_string({search = vim.fn.input("Grep > ")});
+    builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
-
