@@ -1,1 +1,3 @@
-vim.cmd "colorscheme slate"
+require('core')
+require('plugin')
+
