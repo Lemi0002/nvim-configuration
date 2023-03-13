@@ -17,9 +17,14 @@ end
 -- Install plugins
 packer.startup(function()
     use('wbthomason/packer.nvim')
-    use('ryanoasis/vim-devicons')
     use('tanvirtin/monokai.nvim')
     use('folke/tokyonight.nvim')
+    use('nvim-tree/nvim-web-devicons')
+    use({
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons' }
+    })
+    --use('preservim/nerdtree')
     use(
         'nvim-treesitter/nvim-treesitter',
         { run = ':TSUpdate' }
@@ -27,7 +32,9 @@ packer.startup(function()
     use({
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = {
+            { 'nvim-lua/plenary.nvim' }
+        }
     })
     use({
         'VonHeikemen/lsp-zero.nvim',
@@ -51,5 +58,14 @@ packer.startup(function()
             { 'rafamadriz/friendly-snippets' },
         }
     })
+    use('s1n7ax/nvim-terminal')
     use('rstacruz/vim-closer')
+    use({
+        'sudormrfbin/cheatsheet.nvim',
+        requires = {
+            { 'nvim-telescope/telescope.nvim' },
+            { 'nvim-lua/popup.nvim' },
+            { 'nvim-lua/plenary.nvim' },
+        }
+    })
 end)

@@ -7,7 +7,7 @@ if not status_ok then
 end
 
 -- Configure settings
-configs.setup {
+configs.setup({
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
     ensure_installed = { 'c', 'lua', 'vim', 'help', 'query' },
 
@@ -17,4 +17,4 @@ configs.setup {
         enable = true,
         additional_vim_regex_highlighting = false,
     }
-}
+})
