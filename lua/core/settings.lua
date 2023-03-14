@@ -22,9 +22,12 @@ vim.opt.expandtab = true
 vim.opt.listchars = 'tab:<->,space:\u{00B7},multispace:\u{00B7}\u{00B7}\u{00B7}|'
 vim.opt.list = true
 
+-- Disable startup screen
+vim.opt.shortmess = 'I'
+
 -- Default color scheme
 local status_ok = pcall(vim.cmd.colorscheme, 'tokyonight-moon')
 
 if not status_ok then
-    vim.cmd.colorscheme('desert')
+    vim.cmd.colorscheme('slate')
 end
