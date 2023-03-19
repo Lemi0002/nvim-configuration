@@ -6,4 +6,5 @@ if not status_ok then
     return
 end
 
+-- Configure settings
 lualine.setup()

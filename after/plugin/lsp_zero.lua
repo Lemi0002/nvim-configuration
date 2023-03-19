@@ -8,7 +8,7 @@ end
 
 local lsp = lsp_zero.preset({
     name = 'minimal',
-    set_lsp_keymaps = { omit = { '<F2>' } },
+    set_lsp_keymaps = { omit = { '<F2>', '[d', ']d' } },
     manage_nvim_cmp = true,
     suggest_lsp_servers = true,
 })
@@ -19,6 +19,9 @@ lsp.on_attach(function(client, bufnr)
 
     vim.keymap.set('n', '<leader>rl', vim.lsp.buf.rename, options)
     vim.keymap.set('n', 'gQ', vim.lsp.buf.format, options)
+    vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, options)
+    vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, options)
+    vim.keymap.set('n', '<leader>dl', '<cmd>Telescope diagnostics<cr>', options)
 end)
 
 lsp.setup()

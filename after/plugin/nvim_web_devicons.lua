@@ -6,6 +6,7 @@ if not status_ok then
     return
 end
 
+-- Configure settings
 nvim_web_devicons.setup({
     default = true,
 })

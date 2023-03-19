@@ -19,6 +19,7 @@ packer.startup(function()
     use('wbthomason/packer.nvim')
     use('tanvirtin/monokai.nvim')
     use('folke/tokyonight.nvim')
+    use('sainnhe/sonokai')
     use('nvim-tree/nvim-web-devicons')
     use({
         'nvim-lualine/lualine.nvim',
@@ -58,7 +59,9 @@ packer.startup(function()
             { 'rafamadriz/friendly-snippets' },
         }
     })
+    use('lewis6991/gitsigns.nvim')
     use('s1n7ax/nvim-terminal')
+    use('numToStr/Comment.nvim')
     use('rstacruz/vim-closer')
     use({
         'sudormrfbin/cheatsheet.nvim',

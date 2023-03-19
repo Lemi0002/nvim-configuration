@@ -9,12 +9,12 @@ end
 -- Configure settings
 telescope.setup()
 
-builtin = require('telescope.builtin')
+telescope_builtin = require('telescope.builtin')
 
 -- Setup keymaps
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fp', builtin.git_files, {})
-vim.keymap.set('n', '<leader>sp', builtin.grep_string, {})
+vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
+vim.keymap.set('n', '<leader>fp', telescope_builtin.git_files, {})
+vim.keymap.set('n', '<leader>sp', telescope_builtin.grep_string, {})
 vim.keymap.set('n', '<leader>sg', function()
-    builtin.grep_string({ search = vim.fn.input("Grep > ") });
+    telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)

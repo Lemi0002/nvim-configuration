@@ -1,4 +1,10 @@
 -- General keymaps
 vim.keymap.set('n', '\u{00F6}', '/')
-vim.keymap.set('n', '<leader>ee', vim.cmd.Ex)
-vim.keymap.set('n', '<leader>h', ':set invhls<CR>')
+vim.keymap.set('n', '<leader>oe', vim.cmd.Ex)
+vim.keymap.set('n', '<leader>h', '<cmd>set invhls<CR>')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<leader>d', '"*d')
+vim.keymap.set('n', '<leader>y', '"*y')
+vim.keymap.set('n', '<leader>p', '"*p')
+vim.keymap.set('n', '<leader>P', '"*P')
