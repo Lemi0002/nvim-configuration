@@ -11,6 +11,8 @@ vim.opt.cursorcolumn = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes'
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- Use spaces instead of tabs
 vim.opt.tabstop = 4
@@ -22,11 +24,31 @@ vim.opt.expandtab = true
 vim.opt.listchars = 'tab:<->,space:\u{00B7},multispace:\u{00B7}\u{00B7}\u{00B7}|'
 vim.opt.list = true
 
--- Use system clipboard with y and p
---vim.opt.clipboard = unnamedplus
-
 -- Disable startup screen
 vim.opt.shortmess = 'I'
+
+-- Completion
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
+-- Disable diagnostic virtual text and set border type
+local border = 'rounded'
+
+vim.diagnostic.config({
+    virtual_text = false,
+    float = { border = border },
+})
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+    vim.lsp.handlers.hover, {
+        border = border
+    }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+    vim.lsp.handlers.signature_help, {
+        border = border
+    }
+)
 
 -- Default color scheme
 local status_ok = pcall(vim.cmd.colorscheme, 'sonokai')
