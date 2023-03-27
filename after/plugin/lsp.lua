@@ -7,12 +7,41 @@ end
 
 -- Required dependencies by this package
 local cmp_nvim_lsp
+local mason
+local mason_lspconfig
+
 status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 
 if not status_ok then
     print('cmp_nvim_lsp not found')
     return
 end
+
+status_ok, mason = pcall(require, 'mason')
+
+if not mason then
+    print('mason not found')
+    return
+end
+
+status_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
+
+if not mason_lspconfig then
+    print('mason-lspconfig not found')
+    return
+end
+
+-- Configure mason plugins
+mason.setup({
+    ui = {
+        icons = {
+            package_installed = '\u{f00c}',
+            package_pending = '\u{f061}',
+            package_uninstalled = '\u{f00d}'
+        }
+    }
+})
+mason_lspconfig.setup()
 
 -- Configure language servers
 local capabilities = cmp_nvim_lsp.default_capabilities()
