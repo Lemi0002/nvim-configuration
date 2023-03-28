@@ -6,9 +6,17 @@ if not status_ok then
 end
 
 -- Required dependencies by this package
+local settings
 local cmp_nvim_lsp
 local mason
 local mason_lspconfig
+
+status_ok, settings = pcall(require, 'lua.core.settings')
+
+if not status_ok then
+    print('settings not found')
+    return
+end
 
 status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 
@@ -34,11 +42,12 @@ end
 -- Configure mason plugins
 mason.setup({
     ui = {
+        border = settings.border,
         icons = {
             package_installed = '\u{f00c}',
             package_pending = '\u{f061}',
-            package_uninstalled = '\u{f00d}'
-        }
+            package_uninstalled = '\u{f00d}',
+        },
     }
 })
 mason_lspconfig.setup()

@@ -1,3 +1,5 @@
+local settings = {}
+
 -- Leader settings
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -31,28 +33,34 @@ vim.opt.shortmess = 'I'
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 -- Disable diagnostic virtual text and set border type
-local border = 'rounded'
+settings.border = 'rounded'
 
 vim.diagnostic.config({
     virtual_text = false,
-    float = { border = border },
+    float = { border = settings.border },
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover, {
-        border = border
+        border = settings.border
     }
 )
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signature_help, {
-        border = border
+        border = settings.border
     }
 )
 
 -- Default color scheme
-local status_ok = pcall(vim.cmd.colorscheme, 'sonokai')
+status_ok = pcall(vim.cmd.colorscheme, 'sonokai')
 
 if not status_ok then
     vim.cmd.colorscheme('slate')
 end
+
+-- Reset floating window color
+vim.api.nvim_set_hl(0, 'FloatBorder', {})
+vim.api.nvim_set_hl(0, 'NormalFloat', {})
+
+return settings
