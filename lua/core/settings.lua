@@ -33,22 +33,24 @@ vim.opt.shortmess = 'I'
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 -- Disable diagnostic virtual text and set border type
-settings.border = 'rounded'
+local border = 'rounded'
+package.preload.settings = function() return {border = border} end
+settings.boder = border
 
 vim.diagnostic.config({
     virtual_text = false,
-    float = { border = settings.border },
+    float = { border = border },
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
     vim.lsp.handlers.hover, {
-        border = settings.border
+        border = border
     }
 )
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signature_help, {
-        border = settings.border
+        border = border
     }
 )
 

@@ -5,13 +5,15 @@ if not status_ok then
     return
 end
 
+local lspconfig_ui_windows = require('lspconfig.ui.windows')
+
 -- Required dependencies by this package
 local settings
 local cmp_nvim_lsp
 local mason
 local mason_lspconfig
 
-status_ok, settings = pcall(require, 'lua.core.settings')
+status_ok, settings = pcall(require, 'settings')
 
 if not status_ok then
     print('settings not found')
@@ -78,6 +80,43 @@ lspconfig.lua_ls.setup({
         },
     },
 })
+lspconfig.hdl_checker.setup({
+    default_config = {
+        cmd = {
+            'hdl_checker',
+            '--lsp',
+        },
+        filetypes = {
+            'vhdl',
+            'verilog',
+            'systemverilog'
+        },
+        root_dir = function(fname)
+            -- will look for the .hdl_checker.config file in parent directory, a
+            -- .git directory, or else use the current directory, in that order.
+            local util = require 'lspconfig'.util
+            return util.root_pattern('.hdl_checker.config')(fname) or util.find_git_ancestor(fname) or
+            util.path.dirname(fname)
+        end,
+        settings = {},
+    },
+})
+--[[ if not require'lspconfig.configs'.hdl_checker then
+  require'lspconfig.configs'.hdl_checker = {
+    default_config = {
+    cmd = {"hdl_checker", "--lsp", };
+    filetypes = {"vhdl", "verilog", "systemverilog"};
+      root_dir = function(fname)
+        -- will look for the .hdl_checker.config file in parent directory, a
+        -- .git directory, or else use the current directory, in that order.
+        local util = require'lspconfig'.util
+        return util.root_pattern('.hdl_checker.config')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
+      end;
+      settings = {};
+    };
+  }
+end
+require'lspconfig'.hdl_checker.setup{} ]]
 
 -- Buffer specific keymaps
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -98,6 +137,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         --[[ vim.keymap.set('n', '<leader>wl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, opts) ]]
-        -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     end,
 })
+
+-- Configure lspconfig
+lspconfig_ui_windows.default_options.border = settings.border
