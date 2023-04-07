@@ -12,6 +12,7 @@ telescope.setup()
 local telescope_builtin = require('telescope.builtin')
 
 -- Package specific keymaps
+vim.keymap.set('n', '<leader>ot', telescope_builtin.builtin)
 vim.keymap.set('n', '<leader>dl', telescope_builtin.diagnostics)
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files)
 vim.keymap.set('n', '<leader>fp', telescope_builtin.git_files)

@@ -66,21 +66,33 @@ lspconfig.clangd.setup({
 lspconfig.lua_ls.setup({
     capabilities = capabilities,
     settings = {
-        runtime = {
-            version = 'LuaJIT',
-        },
-        diagnostics = {
-            globals = { 'vim' },
-        },
-        workspace = {
-            library = vim.api.nvim_get_runtime_file('', true),
-        },
-        telemetry = {
-            enable = false,
+        Lua = {
+            runtime = {
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                globals = { 'vim' },
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file('', true),
+                checkThirdParty = false,
+            },
+            telemetry = {
+                enable = false,
+            },
         },
     },
 })
-lspconfig.hdl_checker.setup({
+lspconfig.texlab.setup({
+    capabilities = capabilities,
+    single_file_support = true,
+    filetypes = {
+        'tex',
+        'plaintex',
+        'bib'
+    },
+})
+--[[ lspconfig.hdl_checker.setup({
     default_config = {
         cmd = {
             'hdl_checker',
@@ -96,33 +108,19 @@ lspconfig.hdl_checker.setup({
             -- .git directory, or else use the current directory, in that order.
             local util = require 'lspconfig'.util
             return util.root_pattern('.hdl_checker.config')(fname) or util.find_git_ancestor(fname) or
-            util.path.dirname(fname)
+                util.path.dirname(fname)
         end,
         settings = {},
     },
-})
---[[ if not require'lspconfig.configs'.hdl_checker then
-  require'lspconfig.configs'.hdl_checker = {
-    default_config = {
-    cmd = {"hdl_checker", "--lsp", };
-    filetypes = {"vhdl", "verilog", "systemverilog"};
-      root_dir = function(fname)
-        -- will look for the .hdl_checker.config file in parent directory, a
-        -- .git directory, or else use the current directory, in that order.
-        local util = require'lspconfig'.util
-        return util.root_pattern('.hdl_checker.config')(fname) or util.find_git_ancestor(fname) or util.path.dirname(fname)
-      end;
-      settings = {};
-    };
-  }
-end
-require'lspconfig'.hdl_checker.setup{} ]]
+}) ]]
 
 -- Buffer specific keymaps
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    callback = function(ev)
-        local opts = { buffer = ev.buf }
+    callback = function(args)
+        local opts = { buffer = args.buf }
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)

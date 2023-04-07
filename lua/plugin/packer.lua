@@ -1,9 +1,8 @@
 -- Install packer on any machine on first execution
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
-if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     print('Installed packer. Close and reopen nvim and use :PackerSync')
 end
 
@@ -23,9 +22,8 @@ packer.startup(function()
     use('nvim-tree/nvim-web-devicons')
     use({
         'nvim-lualine/lualine.nvim',
-        requires = { 'nvim-tree/nvim-web-devicons' }
+        requires = { 'nvim-tree/nvim-web-devicons' },
     })
-    --use('preservim/nerdtree')
     use(
         'nvim-treesitter/nvim-treesitter',
         { run = ':TSUpdate' }
@@ -34,9 +32,10 @@ packer.startup(function()
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
         requires = {
-            { 'nvim-lua/plenary.nvim' }
-        }
+            { 'nvim-lua/plenary.nvim' },
+        },
     })
+    use('jose-elias-alvarez/null-ls.nvim')
     use('neovim/nvim-lspconfig')
     use('hrsh7th/nvim-cmp')
     use('hrsh7th/cmp-nvim-lsp')
@@ -57,6 +56,6 @@ packer.startup(function()
             { 'nvim-telescope/telescope.nvim' },
             { 'nvim-lua/popup.nvim' },
             { 'nvim-lua/plenary.nvim' },
-        }
+        },
     })
 end)
