@@ -32,6 +32,9 @@ vim.opt.shortmess = 'I'
 -- Completion
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
+-- Spellchecking
+vim.opt.spelllang = { 'en_us', 'de_ch' }
+
 -- Default color scheme
 local status_ok = pcall(vim.cmd.colorscheme, 'sonokai')
 -- status_ok = false
@@ -71,5 +74,5 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     }
 )
 
-package.preload.settings = function() return {border = settings.border} end
+package.preload.settings = function() return { border = settings.border } end
 return settings
