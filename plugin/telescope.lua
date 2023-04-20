@@ -9,9 +9,13 @@ end
 -- Configure settings
 telescope.setup()
 
-local telescope_builtin = require('telescope.builtin')
+-- Reconfigure highlights
+vim.cmd.highlight('clear TelescopePromptCounter')
+vim.cmd.highlight('link TelescopePromptCounter TelescopePromptNormal')
 
 -- Package specific keymaps
+local telescope_builtin = require('telescope.builtin')
+
 vim.keymap.set('n', '<leader>ot', telescope_builtin.builtin)
 vim.keymap.set('n', '<leader>dl', telescope_builtin.diagnostics)
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files)

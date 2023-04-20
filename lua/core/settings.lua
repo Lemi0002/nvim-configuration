@@ -36,8 +36,24 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 vim.opt.spelllang = { 'en_us', 'de_ch' }
 
 -- Default color scheme
-local status_ok = pcall(vim.cmd.colorscheme, 'sonokai')
--- status_ok = false
+local colorscheme = 'sonokai'
+
+vim.api.nvim_create_autocmd('ColorSchemePre', {
+    group = vim.api.nvim_create_augroup('SonokaiPre', {}),
+    pattern = { 'sonokai' },
+    callback = function(args)
+        vim.cmd.set('termguicolors')
+        vim.g.sonokai_colors_override = {
+            bg0 = { '#262626', '235' },
+            bg1 = { '#373737', '236' },
+            bg2 = { '#414141', '236' },
+            bg3 = { '#464646', '237' },
+            bg4 = { '#505050', '237' },
+        }
+    end,
+})
+
+local status_ok = pcall(vim.cmd.colorscheme, colorscheme)
 
 if not status_ok then
     vim.cmd.colorscheme('slate')
@@ -48,11 +64,9 @@ vim.cmd.highlight('Comment cterm=NONE gui=NONE')
 vim.cmd.highlight('clear NormalFloat')
 vim.cmd.highlight('clear FloatBorder')
 vim.cmd.highlight('clear LspInfoBorder')
-vim.cmd.highlight('clear TelescopePromptCounter')
 vim.cmd.highlight('link NormalFloat Normal')
 vim.cmd.highlight('link FloatBorder Normal')
 vim.cmd.highlight('link LspInfoBorder Normal')
-vim.cmd.highlight('link TelescopePromptCounter TelescopePromptNormal')
 
 -- Disable diagnostic virtual text and set border type
 settings.border = 'rounded'

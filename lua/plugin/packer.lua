@@ -16,8 +16,6 @@ end
 -- Install plugins
 packer.startup(function()
     use('wbthomason/packer.nvim')
-    use('tanvirtin/monokai.nvim')
-    use('folke/tokyonight.nvim')
     use('sainnhe/sonokai')
     use('nvim-tree/nvim-web-devicons')
     use({
