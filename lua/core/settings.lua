@@ -59,8 +59,11 @@ if not status_ok then
     vim.cmd.colorscheme('slate')
 end
 
--- Disable italic comments and reconfigure float colors
+-- Disable italic comments and reconfigure highlights
 vim.cmd.highlight('Comment cterm=NONE gui=NONE')
+vim.cmd.highlight('HintFloat ctermbg=None guibg=None')
+vim.cmd.highlight('WarningFloat ctermbg=None guibg=None')
+vim.cmd.highlight('ErrorFloat ctermbg=None guibg=None')
 vim.cmd.highlight('clear NormalFloat')
 vim.cmd.highlight('clear FloatBorder')
 vim.cmd.highlight('clear LspInfoBorder')
