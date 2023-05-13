@@ -61,6 +61,7 @@ end
 
 -- Disable italic comments and reconfigure highlights
 vim.cmd.highlight('Comment cterm=NONE gui=NONE')
+vim.cmd.highlight('InfoFloat ctermbg=None guibg=None')
 vim.cmd.highlight('HintFloat ctermbg=None guibg=None')
 vim.cmd.highlight('WarningFloat ctermbg=None guibg=None')
 vim.cmd.highlight('ErrorFloat ctermbg=None guibg=None')
