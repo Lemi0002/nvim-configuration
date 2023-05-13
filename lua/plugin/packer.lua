@@ -49,6 +49,10 @@ packer.startup(function()
     use('numToStr/Comment.nvim')
     use('rstacruz/vim-closer')
     use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+    use({
         'sudormrfbin/cheatsheet.nvim',
         requires = {
             { 'nvim-telescope/telescope.nvim' },

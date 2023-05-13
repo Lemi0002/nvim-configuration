@@ -9,8 +9,8 @@ end
 -- Configure settings
 comment.setup({
     toggler = {
-        line = '<leader>clc',
-        block = '<leader>clb'
+        line = '<leader>clt',
+        block = '<leader>cbt'
     },
     opleader = {
         line = '<leader>cl',
