@@ -43,6 +43,10 @@ end
 
 -- Configure mason plugins
 mason.setup({
+    registries = {
+        "github:Lemi0002/mason-registry",
+        "github:mason-org/mason-registry",
+    },
     ui = {
         border = settings.border,
         icons = {
@@ -53,6 +57,12 @@ mason.setup({
     }
 })
 mason_lspconfig.setup()
+
+--[[ vim.cmd(':MasonInstall pyright')
+vim.cmd(':MasonInstall clangd')
+vim.cmd(':MasonInstall lua-language-server')
+vim.cmd(':MasonInstall texlab')
+vim.cmd(':MasonInstall vhdl_ls') ]]
 
 -- Configure language servers
 local capabilities = cmp_nvim_lsp.default_capabilities()
@@ -92,22 +102,15 @@ lspconfig.texlab.setup({
     },
     single_file_support = true,
 })
-lspconfig.hdl_checker.setup({
+lspconfig.vhdl_ls.setup({
     capabilities = capabilities,
     cmd = {
-        'hdl_checker',
-        '--lsp',
+        'vhdl_ls',
     },
     filetypes = {
+        'vhd',
         'vhdl',
-        'verilog',
-        'systemverilog'
     },
-    root_dir = function(fname)
-        return lspconfig.util.root_pattern('.hdl_checker.config')(fname)
-            or lspconfig.util.find_git_ancestor(fname)
-            or lspconfig.util.path.dirname(fname)
-    end,
     single_file_support = true,
 })
 
