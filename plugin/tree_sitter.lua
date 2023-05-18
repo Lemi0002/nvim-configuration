@@ -8,7 +8,7 @@ end
 
 -- Configure settings
 configs.setup({
-    ensure_installed = { 'c', 'lua', 'vim', 'help', 'query' },
+    ensure_installed = { 'c', 'lua', 'vim', 'query' },
     sync_install = false,
     auto_install = true,
     highlight = {

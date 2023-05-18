@@ -6,7 +6,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     print('Installed packer. Close and reopen nvim and use :PackerSync')
 end
 
--- Use a protected call to not error out on first use
+-- Use a protected call
 local status_ok, packer = pcall(require, 'packer')
 
 if not status_ok then
@@ -23,9 +23,11 @@ packer.startup(function()
         requires = { 'nvim-tree/nvim-web-devicons' },
     })
     use(
-        'nvim-treesitter/nvim-treesitter',
+        -- 'nvim-treesitter/nvim-treesitter',
+        'Lemi0002/nvim-treesitter',
         { run = ':TSUpdate' }
     )
+    use('nvim-treesitter/playground')
     use({
         'nvim-telescope/telescope.nvim',
         tag = '0.1.1',
