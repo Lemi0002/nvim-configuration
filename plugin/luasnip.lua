@@ -40,16 +40,6 @@ local parse = require("luasnip.util.parser").parse_snippet
 local ms = luasnip.multi_snippet
 
 luasnip.add_snippets('vhdl', {
-    s('entitiy',
-        fmt([[
-            entity {} is
-
-            end entity {};
-        ]], {
-            i(1, 'entitiy_name'),
-            rep(1),
-        })
-    ),
     s('architecture',
         fmt([[
             architecture {} of {} is
@@ -62,6 +52,19 @@ luasnip.add_snippets('vhdl', {
             rep(1)
         })
     ),
+    s('case',
+        fmt([[
+            case {} then 
+                when {} =>
+
+                when others =>
+
+            end case;
+        ]], {
+            i(1, 'signal'),
+            i(2, 'state'),
+        })
+    ),
     s('component',
         fmt([[
             component {}
@@ -71,6 +74,56 @@ luasnip.add_snippets('vhdl', {
             end component;
         ]], {
             i(1, 'entitiy_name'),
+        })
+    ),
+    s('entitiy',
+        fmt([[
+            entity {} is
+
+            end entity {};
+        ]], {
+            i(1, 'entitiy_name'),
+            rep(1),
+        })
+    ),
+    s('if',
+        fmt([[
+            if {} then
+
+            end if;
+        ]], {
+            i(1, 'condition'),
+        })
+    ),
+    s('if_else',
+        fmt([[
+            if {} then
+
+            else
+
+            end if;
+        ]], {
+            i(1, 'condition'),
+        })
+    ),
+    s('if_elsif',
+        fmt([[
+            if {} then
+
+            elsif {} then
+
+            end if;
+        ]], {
+            i(1, 'condition'),
+            i(2, 'condition'),
+        })
+    ),
+    s('loop',
+        fmt([[
+            loop
+
+            end loop;
+        ]], {
         })
     ),
     s('process',
@@ -95,6 +148,32 @@ luasnip.add_snippets('vhdl', {
                 }),
                 t(''),
             }),
+        })
+    ),
+    s('when',
+        fmt([[
+            {} <= 
+                {} when {} = {} else
+                {};
+        ]], {
+            i(1, 'assignee'),
+            i(2, 'value'),
+            i(3, 'signal'),
+            i(4, 'state'),
+            i(5, 'value'),
+        })
+    ),
+    s('with',
+        fmt([[
+            with {} select {} <=
+                {} when {},
+                {} when others;
+        ]], {
+            i(1, 'signal'),
+            i(2, 'assignee'),
+            i(3, 'value'),
+            i(4, 'state'),
+            i(5, 'value'),
         })
     ),
 })
