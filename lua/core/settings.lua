@@ -43,6 +43,8 @@ vim.api.nvim_create_autocmd('ColorSchemePre', {
     pattern = { 'sonokai' },
     callback = function(args)
         vim.cmd.set('termguicolors')
+        vim.g.sonokai_enable_italic = 0
+        vim.g.sonokai_disable_italic_comment = 1
         vim.g.sonokai_colors_override = {
             bg0 = { '#262626', '235' },
             bg1 = { '#373737', '236' },
@@ -59,8 +61,11 @@ if not status_ok then
     vim.cmd.colorscheme('slate')
 end
 
--- Disable italic comments and reconfigure highlights
+-- Disable italics 
 vim.cmd.highlight('Comment cterm=NONE gui=NONE')
+vim.cmd.highlight('TSEmphasis cterm=NONE gui=NONE')
+
+-- reconfigure highlights
 vim.cmd.highlight('InfoFloat ctermbg=None guibg=None')
 vim.cmd.highlight('HintFloat ctermbg=None guibg=None')
 vim.cmd.highlight('WarningFloat ctermbg=None guibg=None')

@@ -9,19 +9,14 @@ end
 -- Configure settings
 comment.setup({
     toggler = {
-        line = '<leader>clt',
-        block = '<leader>cbt'
+        line = '<leader>cl',
+        block = '<leader>ck'
     },
     opleader = {
-        line = '<leader>cl',
-        block = '<leader>cb'
-    },
-    extra = {
-        above = '<leader>clO',
-        below = '<leader>clo',
-        eol = '<leader>clA'
+        line = '<leader>cL',
+        block = '<leader>cK'
     },
     mappings = {
-        extra = true
+        extra = false,
     }
 })
