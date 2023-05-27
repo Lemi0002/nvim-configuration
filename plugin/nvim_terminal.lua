@@ -14,4 +14,4 @@ nvim_terminal.setup({
 })
 
 -- Package specific keymaps
-vim.keymap.set('n', '<leader>;', '<cmd>lua NTGlobal["terminal"]:toggle()<CR>')
+vim.keymap.set('n', '<leader>;', '<cmd>lua NTGlobal["terminal"]:toggle()<CR>', { desc = 'Open terminal' })

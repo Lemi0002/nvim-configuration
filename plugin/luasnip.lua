@@ -7,10 +7,10 @@ if not status_ok then
 end
 
 -- Package specific keymaps
-vim.keymap.set('i', '<C-j>', function() luasnip.jump(1) end)
-vim.keymap.set('i', '<C-k>', function() luasnip.jump(-1) end)
-vim.keymap.set('i', '<C-h>', function() luasnip.change_choice(1) end)
-vim.keymap.set('s', '<C-h>', function() luasnip.change_choice(1) end)
+vim.keymap.set('i', '<C-j>', function() luasnip.jump(1) end, { desc = 'Jump to next node' })
+vim.keymap.set('i', '<C-k>', function() luasnip.jump(-1) end, { desc = 'Jump to previous node' })
+vim.keymap.set('i', '<C-h>', function() luasnip.change_choice(1) end, { desc = 'Change node choice' })
+vim.keymap.set('s', '<C-h>', function() luasnip.change_choice(1) end, { desc = 'Change node choice' })
 
 -- Define snippets
 local s = luasnip.snippet
@@ -54,7 +54,7 @@ luasnip.add_snippets('vhdl', {
     ),
     s('case',
         fmt([[
-            case {} then 
+            case {} is
                 when {} =>
 
                 when others =>
@@ -69,7 +69,7 @@ luasnip.add_snippets('vhdl', {
         fmt([[
             component {}
                 port(
-                    
+
                 );
             end component;
         ]], {
@@ -152,7 +152,7 @@ luasnip.add_snippets('vhdl', {
     ),
     s('when',
         fmt([[
-            {} <= 
+            {} <=
                 {} when {} = {} else
                 {};
         ]], {

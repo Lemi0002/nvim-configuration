@@ -118,24 +118,23 @@ lspconfig.vhdl_ls.setup({
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(args)
-        local opts = { buffer = args.buf }
         local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, opts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-        vim.keymap.set('n', 'gQ', vim.lsp.buf.format, opts)
-        vim.keymap.set('n', '<leader>rl', vim.lsp.buf.rename, opts)
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = args.buf, desc = 'Go to declaration' })
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf, desc = 'Go to definition' })
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = args.buf, desc = 'Go to implementation' })
+        vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = 'Go to type definition' })
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = args.buf, desc = 'Show references' })
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf, desc = 'Show hover information' })
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = args.buf, desc = 'Show signature information' })
+        vim.keymap.set('n', 'gQ', vim.lsp.buf.format, { buffer = args.buf, desc = 'Go to declaration' })
+        vim.keymap.set('n', '<leader>rl', vim.lsp.buf.rename, { buffer = args.buf, desc = 'Rename symbol' })
         -- vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
         -- vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
         --[[ vim.keymap.set('n', '<leader>wl', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, opts) ]]
-        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = args.buf, desc = 'Run code action' })
     end,
 })
 
