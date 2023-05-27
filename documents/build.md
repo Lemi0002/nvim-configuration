@@ -31,6 +31,9 @@ Compile a top level file and start the simulator both using the `Xilinx-Vivado` 
 More information can be found under [Xilinx-Vivado](https://docs.xilinx.com/r/2022.1-English/ug900-vivado-logic-simulation/Simulating-in-Batch-or-Scripted-Mode-in-Vivado-Simulator).
 
 ```bat
+    if not exist xsim mkdir xsim
+    cd xsim
+
     call "<path-to-vivado-version>\bin\xvhdl.bat" -work work "<path-to-file>\file.vhd" "<path-to-file>\file_tb.vhd" -nolog
     if %ERRORLEVEL% gtr 0 exit
 
@@ -44,7 +47,10 @@ Alternatively a project file `project.prj` can be used to include all necessary 
 
 
 ```bat
-    call "<path-to-vivado-version>\bin\xvhdl.bat" -prj project.prj -nolog
+    if not exist xsim mkdir xsim
+    cd xsim
+
+    call "<path-to-vivado-version>\bin\xvhdl.bat" -prj <path-to-file>\project.prj -nolog
     if %ERRORLEVEL% gtr 0 exit
 
     call "<path-to-vivado-version>\bin\xelab.bat" -top work.file_tb -debug wave -nolog
