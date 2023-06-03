@@ -22,5 +22,5 @@ vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = 'Find f
 vim.keymap.set('n', '<leader>fp', telescope_builtin.git_files, { desc = 'Find files in git' })
 vim.keymap.set('n', '<leader>sp', telescope_builtin.grep_string, { desc = 'Search for word under cursor in files' })
 vim.keymap.set('n', '<leader>sg', function()
-    telescope_builtin.grep_string({ search = vim.fn.input("Grep > ") });
+    telescope_builtin.grep_string({ search = vim.fn.input("Search: ") });
 end, { desc = 'Search for word in files' })

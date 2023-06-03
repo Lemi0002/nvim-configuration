@@ -15,6 +15,7 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes'
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.mouse = nil
 
 -- Use spaces instead of tabs
 vim.opt.tabstop = 4

@@ -1,26 +1,40 @@
+local get_file_names = function()
+    local keyword = vim.fn.input('Keyword: ')
+
+    vim.fn.jobstart('rg --files --sort path | rg --fixed-strings "' .. keyword .. '"', {
+        stdout_buffered = true,
+        on_stdout = function (_, data)
+            vim.api.nvim_buf_set_lines(0, 0, -1, false, data)
+        end ,
+    })
+end
+
 local export_current_file_name = function()
     local name = vim.fn.expand('%:t')
     vim.fn.setreg('+', name)
+    print('Copied file name to system clipboard')
 end
 
 local export_current_file_path = function()
     local path = vim.fn.expand('%')
     vim.fn.setreg('+', path)
+    print('Copied file path to system clipboard')
 end
 
 local run_current_file = function()
     local extension = 'build.bat'
     local delimiter = '_'
     local path = vim.fn.expand('%:h')
-    local name = vim.fn.expand('%:t:r')
-    local file = name .. delimiter .. extension
+    local name_full = vim.fn.expand('%:t')
+    local name_cropped = vim.fn.expand('%:t:r')
+    local file = name_cropped .. delimiter .. extension
     local file_run = vim.fn.expand(path .. '/' .. file)
     local file_run_generic = vim.fn.expand(path .. '/' .. extension)
 
     if vim.fn.filereadable(file_run) == 1 then
-        vim.cmd('!"' .. file_run .. '"')
+        vim.cmd('!"' .. file_run .. '" "' .. name_full .. '"')
     elseif vim.fn.filereadable(file_run_generic) == 1 then
-        vim.cmd('!"' .. file_run_generic .. '"')
+        vim.cmd('!"' .. file_run_generic .. '" "' .. name_full .. '"')
     else
         print(file .. ' and ' .. extension .. ' not found')
     end
@@ -56,3 +70,4 @@ vim.keymap.set('v', '<leader>d', '"+d', { desc = 'Delete to system clipboard' })
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
 vim.keymap.set('v', '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
 vim.keymap.set('v', '<leader>P', '"+P', { desc = 'Paste from system clipboard' })
+vim.keymap.set('n', '<leader>gf', get_file_names, {desc = 'Get files names with keyword'})
