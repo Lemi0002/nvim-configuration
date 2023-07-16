@@ -28,32 +28,83 @@ globals.export_current_file_path = function()
     print('Copied file path to system clipboard')
 end
 
-globals.run_current_file = function()
-    local extension = 'build.bat'
-    local delimiter = '_'
-    local path = vim.fn.expand('%:h')
-    local name_full = vim.fn.expand('%:t')
-    local name_cropped = vim.fn.expand('%:t:r')
-    local file = name_cropped .. delimiter .. extension
-    local file_run = vim.fn.expand(path .. '/' .. file)
-    local file_run_generic = vim.fn.expand(path .. '/' .. extension)
+globals.run_build = function(file_mode)
+    local configuration = {
+        name = 'build',
+        extensions = {
+            '.py',
+            '.sh',
+            '.bat',
+        },
+        delimiter = '_',
+    }
 
-    if vim.fn.filereadable(file_run) == 1 then
-        vim.cmd('!"' .. file_run .. '" "' .. name_full .. '"')
-    elseif vim.fn.filereadable(file_run_generic) == 1 then
-        vim.cmd('!"' .. file_run_generic .. '" "' .. name_full .. '"')
+    local file_path = vim.fn.expand('%:h')
+    local file_name = vim.fn.expand('%:t')
+    local file_name_root = vim.fn.expand('%:t:r')
+    local file
+    local file_found = false
+
+    if file_mode == true then
+        for _, extension in ipairs(configuration.extensions) do
+            file = vim.fn.expand(
+                file_path ..
+                '/' ..
+                file_name_root ..
+                configuration.delimiter ..
+                configuration.name ..
+                extension
+            )
+
+            if vim.fn.filereadable(file) == 1 then
+                file_found = true
+                goto file_found
+            end
+        end
+
+        for _, extension in ipairs(configuration.extensions) do
+            file = vim.fn.expand(
+                file_path ..
+                '/' ..
+                configuration.name ..
+                extension
+            )
+
+            if vim.fn.filereadable(file) == 1 then
+                file_found = true
+                break
+            end
+        end
+
+        ::file_found::
+        if file_found then
+            vim.cmd('!"' .. file .. '" "' .. file_name .. '"')
+        else
+            print(
+                '"' .. 
+                file_name_root ..
+                configuration.delimiter ..
+                configuration.name ..
+                '" and local "' ..
+                configuration.name ..
+                '" not found'
+            )
+        end
     else
-        print(file .. ' and ' .. extension .. ' not found')
-    end
-end
+        for _, extension in ipairs(configuration.extensions) do
+            file = vim.fn.expand(configuration.name .. extension)
 
-globals.run_project = function()
-    local file_run_generic = 'build.bat'
+            if vim.fn.filereadable(file) == 1 then
+                file_found = true
+                break
+            end
+        end
 
-    if vim.fn.filereadable(file_run_generic) == 1 then
-        vim.cmd('!"' .. file_run_generic .. '"')
-    else
-        print(file_run_generic .. ' not found')
+        if file_found then
+            vim.cmd('!"' .. file .. '"')
+        else
+            print('"' .. configuration.name .. '" not found')
+        end
     end
 end
 
