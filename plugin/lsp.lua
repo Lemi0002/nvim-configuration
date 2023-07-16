@@ -12,6 +12,7 @@ local settings
 local cmp_nvim_lsp
 local mason
 local mason_lspconfig
+local mason_tool_installer
 
 status_ok, settings = pcall(require, 'settings')
 
@@ -29,23 +30,30 @@ end
 
 status_ok, mason = pcall(require, 'mason')
 
-if not mason then
+if not status_ok then
     print('mason not found')
     return
 end
 
 status_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
 
-if not mason_lspconfig then
+if not status_ok then
     print('mason-lspconfig not found')
+    return
+end
+
+status_ok, mason_tool_installer = pcall(require, 'mason-tool-installer')
+
+if not status_ok then
+    print('mason-tool-installer not found')
     return
 end
 
 -- Configure mason plugins
 mason.setup({
     registries = {
-        "github:Lemi0002/mason-registry",
         "github:mason-org/mason-registry",
+        "github:Lemi0002/mason-registry",
     },
     ui = {
         border = settings.border,
@@ -57,19 +65,21 @@ mason.setup({
     }
 })
 mason_lspconfig.setup()
-
---[[ vim.cmd(':MasonInstall pyright')
-vim.cmd(':MasonInstall clangd')
-vim.cmd(':MasonInstall lua-language-server')
-vim.cmd(':MasonInstall texlab')
-vim.cmd(':MasonInstall vhdl_ls') ]]
+mason_tool_installer.setup({
+    ensure_installed = {
+        'autopep8',
+        'clang-format',
+        'clangd',
+        'lua-language-server',
+        'pyright',
+        'texlab',
+        'vhdl_ls',
+    }
+})
 
 -- Configure language servers
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
-lspconfig.pyright.setup({
-    capabilities = capabilities,
-})
 lspconfig.clangd.setup({
     capabilities = capabilities,
 })
@@ -92,6 +102,9 @@ lspconfig.lua_ls.setup({
             },
         },
     },
+})
+lspconfig.pyright.setup({
+    capabilities = capabilities,
 })
 lspconfig.texlab.setup({
     capabilities = capabilities,
@@ -126,7 +139,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = 'Go to type definition' })
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = args.buf, desc = 'Show references' })
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf, desc = 'Show hover information' })
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { buffer = args.buf, desc = 'Show signature information' })
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,
+            { buffer = args.buf, desc = 'Show signature information' })
         vim.keymap.set('n', 'gQ', vim.lsp.buf.format, { buffer = args.buf, desc = 'Go to declaration' })
         vim.keymap.set('n', '<leader>rl', vim.lsp.buf.rename, { buffer = args.buf, desc = 'Rename symbol' })
         -- vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)

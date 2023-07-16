@@ -23,7 +23,7 @@ packer.startup(function()
         requires = { 'nvim-tree/nvim-web-devicons' },
     })
     use(
-        -- 'nvim-treesitter/nvim-treesitter',
+    -- 'nvim-treesitter/nvim-treesitter',
         'Lemi0002/nvim-treesitter',
         { run = ':TSUpdate' }
     )
@@ -46,6 +46,7 @@ packer.startup(function()
     use('L3MON4D3/LuaSnip')
     use('williamboman/mason.nvim')
     use('williamboman/mason-lspconfig.nvim')
+    use('WhoIsSethDaniel/mason-tool-installer.nvim')
     use('lewis6991/gitsigns.nvim')
     use('s1n7ax/nvim-terminal')
     use('numToStr/Comment.nvim')
