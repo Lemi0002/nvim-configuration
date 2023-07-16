@@ -66,7 +66,7 @@ end
 vim.cmd.highlight('Comment cterm=NONE gui=NONE')
 vim.cmd.highlight('TSEmphasis cterm=NONE gui=NONE')
 
--- reconfigure highlights
+-- Reconfigure highlights
 vim.cmd.highlight('InfoFloat ctermbg=None guibg=None')
 vim.cmd.highlight('HintFloat ctermbg=None guibg=None')
 vim.cmd.highlight('WarningFloat ctermbg=None guibg=None')
