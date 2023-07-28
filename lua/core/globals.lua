@@ -32,9 +32,9 @@ globals.run_build = function(file_mode)
     local configuration = {
         name = 'build',
         extensions = {
-            '.py',
-            '.sh',
-            '.bat',
+            { name = '.py',  command = 'pyhton' },
+            { name = '.sh',  command = 'bash' },
+            { name = '.bat', command = '' },
         },
         delimiter = '_',
     }
@@ -43,6 +43,7 @@ globals.run_build = function(file_mode)
     local file_name = vim.fn.expand('%:t')
     local file_name_root = vim.fn.expand('%:t:r')
     local file
+    local file_extension
     local file_found = false
 
     if file_mode == true then
@@ -53,11 +54,12 @@ globals.run_build = function(file_mode)
                 file_name_root ..
                 configuration.delimiter ..
                 configuration.name ..
-                extension
+                extension.name
             )
 
             if vim.fn.filereadable(file) == 1 then
                 file_found = true
+                file_extension = extension
                 goto file_found
             end
         end
@@ -67,21 +69,22 @@ globals.run_build = function(file_mode)
                 file_path ..
                 '/' ..
                 configuration.name ..
-                extension
+                extension.name
             )
 
             if vim.fn.filereadable(file) == 1 then
                 file_found = true
+                file_extension = extension
                 break
             end
         end
 
         ::file_found::
         if file_found then
-            vim.cmd('!"' .. file .. '" "' .. file_name .. '"')
+            vim.cmd('!' .. file_extension.command .. ' "' .. file .. '" "' .. file_name .. '"')
         else
             print(
-                '"' .. 
+                '"' ..
                 file_name_root ..
                 configuration.delimiter ..
                 configuration.name ..
@@ -92,16 +95,17 @@ globals.run_build = function(file_mode)
         end
     else
         for _, extension in ipairs(configuration.extensions) do
-            file = vim.fn.expand(configuration.name .. extension)
+            file = vim.fn.expand(configuration.name .. extension.name)
 
             if vim.fn.filereadable(file) == 1 then
                 file_found = true
+                file_extension = extension
                 break
             end
         end
 
         if file_found then
-            vim.cmd('!"' .. file .. '"')
+            vim.cmd('!' .. file_extension.command .. ' "' .. file .. '"')
         else
             print('"' .. configuration.name .. '" not found')
         end
