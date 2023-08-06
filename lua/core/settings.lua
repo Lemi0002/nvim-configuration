@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd('ColorSchemePre', {
         vim.g.sonokai_enable_italic = 0
         vim.g.sonokai_disable_italic_comment = 1
         vim.g.sonokai_colors_override = {
-            bg0 = { '#262626', '235' },
+            bg0 = { '#1d1f21', '235' },
             bg1 = { '#373737', '236' },
             bg2 = { '#414141', '236' },
             bg3 = { '#464646', '237' },
@@ -62,7 +62,7 @@ if not status_ok then
     vim.cmd.colorscheme('slate')
 end
 
--- Disable italics 
+-- Disable italics
 vim.cmd.highlight('Comment cterm=NONE gui=NONE')
 vim.cmd.highlight('TSEmphasis cterm=NONE gui=NONE')
 
