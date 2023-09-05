@@ -72,6 +72,7 @@ mason_tool_installer.setup({
         'clangd',
         'lua-language-server',
         'pyright',
+        'rust_analyzer',
         'texlab',
         'vhdl_ls',
     }
@@ -105,6 +106,16 @@ lspconfig.lua_ls.setup({
 })
 lspconfig.pyright.setup({
     capabilities = capabilities,
+})
+lspconfig.rust_analyzer.setup({
+    capabilities = capabilities,
+    settings = {
+        ['rust-analyzer'] = {
+            cargo = {
+                allFeatures = true,
+            },
+        },
+    },
 })
 lspconfig.texlab.setup({
     capabilities = capabilities,
