@@ -78,6 +78,11 @@ vim.cmd.highlight('link NormalFloat Normal')
 vim.cmd.highlight('link FloatBorder Normal')
 vim.cmd.highlight('link LspInfoBorder Normal')
 
+-- Disable highlights for transparency
+vim.cmd.highlight('Normal ctermbg=None guibg=None')
+vim.cmd.highlight('NormalNC ctermbg=None guibg=None')
+vim.cmd.highlight('NonText ctermbg=None guibg=None')
+
 -- Disable diagnostic virtual text and set border type
 settings.border = 'rounded'
 
