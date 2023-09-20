@@ -32,7 +32,7 @@ globals.run_build = function(file_mode)
     local configuration = {
         name = 'build',
         extensions = {
-            { name = '.py',  command = 'pyhton' },
+            { name = '.py',  command = 'python' },
             { name = '.sh',  command = 'bash' },
             { name = '.bat', command = '' },
         },
