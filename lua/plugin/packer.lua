@@ -14,7 +14,7 @@ if not status_ok then
 end
 
 -- Install plugins
-packer.startup(function()
+packer.startup(function(use)
     use('wbthomason/packer.nvim')
     use('sainnhe/sonokai')
     use('nvim-tree/nvim-web-devicons')
@@ -30,7 +30,6 @@ packer.startup(function()
     use('nvim-treesitter/playground')
     use({
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.1',
         requires = {
             { 'nvim-lua/plenary.nvim' },
         },

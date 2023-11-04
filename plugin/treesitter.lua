@@ -1,5 +1,5 @@
 -- Use protected call
-local status_ok, configs = pcall(require, 'nvim-treesitter.configs')
+local status_ok, nvim_treesitter_configs = pcall(require, 'nvim-treesitter.configs')
 
 if not status_ok then
     print('nvim-treesitter not found')
@@ -7,8 +7,10 @@ if not status_ok then
 end
 
 -- Configure settings
-configs.setup({
+nvim_treesitter_configs.setup({
     ensure_installed = { 'c', 'lua', 'vim', 'query' },
+    ignore_install = {},
+    modules = {},
     sync_install = false,
     auto_install = true,
     highlight = {
