@@ -16,6 +16,10 @@ vim.opt.signcolumn = 'yes'
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.mouse = nil
+vim.opt.cmdwinheight = 20
+
+-- Netrw settings
+vim.g.netrw_banner = false
 
 -- Use spaces instead of tabs
 vim.opt.tabstop = 4
