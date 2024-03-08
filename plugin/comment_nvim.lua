@@ -10,11 +10,11 @@ end
 comment.setup({
     toggler = {
         line = '<leader>cl',
-        block = '<leader>ck'
+        block = '<leader>cb'
     },
     opleader = {
-        line = '<leader>cL',
-        block = '<leader>cK'
+        line = '<leader>cl',
+        block = '<leader>cb'
     },
     mappings = {
         extra = false,
