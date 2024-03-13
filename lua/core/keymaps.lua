@@ -2,7 +2,7 @@ local status_ok, globals = pcall(require, 'core.globals')
 
 if not status_ok then
     print('globals not found')
-    -- return
+    return
 end
 
 -- General keymaps

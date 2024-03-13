@@ -20,7 +20,9 @@ packer.startup(function(use)
     use('nvim-tree/nvim-web-devicons')
     use({
         'nvim-lualine/lualine.nvim',
-        requires = { 'nvim-tree/nvim-web-devicons' },
+        requires = {
+            { 'nvim-tree/nvim-web-devicons' },
+        },
     })
     use(
     -- 'nvim-treesitter/nvim-treesitter',
@@ -47,7 +49,6 @@ packer.startup(function(use)
     use('williamboman/mason-lspconfig.nvim')
     use('WhoIsSethDaniel/mason-tool-installer.nvim')
     use('lewis6991/gitsigns.nvim')
-    use('s1n7ax/nvim-terminal')
     use('numToStr/Comment.nvim')
     use('rstacruz/vim-closer')
     use({
