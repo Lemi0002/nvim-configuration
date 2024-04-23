@@ -84,6 +84,9 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 lspconfig.clangd.setup({
     capabilities = capabilities,
 })
+lspconfig.gopls.setup({
+    capabilities = capabilities,
+})
 lspconfig.lua_ls.setup({
     capabilities = capabilities,
     settings = {
