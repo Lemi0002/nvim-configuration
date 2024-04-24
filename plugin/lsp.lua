@@ -81,6 +81,9 @@ mason_tool_installer.setup({
 -- Configure language servers
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
+lspconfig.bashls.setup {
+    capabilities = capabilities,
+}
 lspconfig.clangd.setup({
     capabilities = capabilities,
 })
