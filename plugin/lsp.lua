@@ -68,8 +68,10 @@ mason_lspconfig.setup()
 mason_tool_installer.setup({
     ensure_installed = {
         'autopep8',
+        'bash-language-server',
         'clang-format',
         'clangd',
+        'gopls',
         'lua-language-server',
         'pyright',
         'rust_analyzer',

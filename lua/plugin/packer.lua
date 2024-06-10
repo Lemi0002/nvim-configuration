@@ -25,7 +25,7 @@ packer.startup(function(use)
         },
     })
     use(
-    -- 'nvim-treesitter/nvim-treesitter',
+        -- 'nvim-treesitter/nvim-treesitter',
         'Lemi0002/nvim-treesitter',
         { run = ':TSUpdate' }
     )
