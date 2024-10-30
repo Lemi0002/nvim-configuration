@@ -8,7 +8,7 @@ end
 
 -- Configure settings
 nvim_treesitter_configs.setup({
-    ensure_installed = { 'c', 'lua', 'vim', 'query' },
+    ensure_installed = { 'c', 'lua', 'vim', 'query', 'diff', 'git_rebase' },
     ignore_install = {},
     modules = {},
     sync_install = false,
