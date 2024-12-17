@@ -34,6 +34,7 @@ packer.startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = {
             { 'nvim-lua/plenary.nvim' },
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
         },
     })
     use('jose-elias-alvarez/null-ls.nvim')
