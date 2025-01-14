@@ -15,7 +15,7 @@ vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes'
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.mouse = nil
+vim.opt.mouse = ''
 vim.opt.cmdwinheight = 20
 
 -- Netrw settings
