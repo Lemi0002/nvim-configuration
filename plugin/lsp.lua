@@ -157,16 +157,22 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = args.buf, desc = 'Go to implementation' })
         vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = 'Go to type definition' })
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = args.buf, desc = 'Show references' })
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf, desc = 'Show hover information' })
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,
+        vim.keymap.set('n', 'K', 
+            function() 
+                vim.lsp.buf.hover({
+                    border=settings.border,
+                })
+            end,
+            { buffer = args.buf, desc = 'Show hover information' })
+        vim.keymap.set('n', '<C-k>',
+            function() 
+                vim.lsp.buf.signature_help({
+                    border=settings.border,
+                })
+            end,
             { buffer = args.buf, desc = 'Show signature information' })
         vim.keymap.set('n', 'gQ', vim.lsp.buf.format, { buffer = args.buf, desc = 'Go to declaration' })
         vim.keymap.set('n', '<leader>rl', vim.lsp.buf.rename, { buffer = args.buf, desc = 'Rename symbol' })
-        -- vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-        -- vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-        --[[ vim.keymap.set('n', '<leader>wl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, opts) ]]
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { buffer = args.buf, desc = 'Run code action' })
     end,
 })

@@ -92,20 +92,10 @@ settings.border = 'rounded'
 
 vim.diagnostic.config({
     virtual_text = false,
-    float = { border = settings.border },
+    float = {
+        border = settings.border,
+    },
 })
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    vim.lsp.handlers.hover, {
-        border = settings.border
-    }
-)
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-    vim.lsp.handlers.signature_help, {
-        border = settings.border
-    }
-)
 
 package.preload.settings = function() return { border = settings.border } end
 return settings
