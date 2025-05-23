@@ -53,7 +53,6 @@ end
 mason.setup({
     registries = {
         "github:mason-org/mason-registry",
-        "github:Lemi0002/mason-registry",
     },
     ui = {
         border = settings.border,
