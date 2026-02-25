@@ -1,13 +1,7 @@
-local status_ok, lspconfig = pcall(require, 'lspconfig')
-
-if not status_ok then
-    print('lspconfig not found')
-    return
-end
-
 local lspconfig_ui_windows = require('lspconfig.ui.windows')
 
 -- Required dependencies by this package
+local status_ok
 local settings
 local cmp_nvim_lsp
 local mason
@@ -81,16 +75,18 @@ mason_tool_installer.setup({
 -- Configure language servers
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
-lspconfig.bashls.setup {
+vim.lsp.config.bashls = {
     capabilities = capabilities,
 }
-lspconfig.clangd.setup({
+vim.lsp.config.clangd = {
     capabilities = capabilities,
-})
-lspconfig.gopls.setup({
+    cmd = { 'clangd', '--log=verbose' },
+    verbose = true,
+}
+vim.lsp.config.gopls = {
     capabilities = capabilities,
-})
-lspconfig.lua_ls.setup({
+}
+vim.lsp.config.lua_ls = {
     capabilities = capabilities,
     settings = {
         Lua = {
@@ -109,11 +105,11 @@ lspconfig.lua_ls.setup({
             },
         },
     },
-})
-lspconfig.pyright.setup({
+}
+vim.lsp.config.pyright = {
     capabilities = capabilities,
-})
-lspconfig.rust_analyzer.setup({
+}
+vim.lsp.config.rust_analyzer = {
     capabilities = capabilities,
     settings = {
         ['rust-analyzer'] = {
@@ -122,8 +118,8 @@ lspconfig.rust_analyzer.setup({
             },
         },
     },
-})
-lspconfig.texlab.setup({
+}
+vim.lsp.config.texlab = {
     capabilities = capabilities,
     filetypes = {
         'tex',
@@ -131,8 +127,8 @@ lspconfig.texlab.setup({
         'bib'
     },
     single_file_support = true,
-})
-lspconfig.vhdl_ls.setup({
+}
+vim.lsp.config.vhdl_ls = {
     capabilities = capabilities,
     cmd = {
         'vhdl_ls',
@@ -142,7 +138,7 @@ lspconfig.vhdl_ls.setup({
         'vhdl',
     },
     single_file_support = true,
-})
+}
 
 -- Buffer specific keymaps
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -155,17 +151,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = args.buf, desc = 'Go to implementation' })
         vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { buffer = args.buf, desc = 'Go to type definition' })
         vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = args.buf, desc = 'Show references' })
-        vim.keymap.set('n', 'K', 
-            function() 
+        vim.keymap.set('n', 'K',
+            function()
                 vim.lsp.buf.hover({
-                    border=settings.border,
+                    border = settings.border,
                 })
             end,
             { buffer = args.buf, desc = 'Show hover information' })
         vim.keymap.set('n', '<C-k>',
-            function() 
+            function()
                 vim.lsp.buf.signature_help({
-                    border=settings.border,
+                    border = settings.border,
                 })
             end,
             { buffer = args.buf, desc = 'Show signature information' })
